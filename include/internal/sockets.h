@@ -119,6 +119,12 @@ struct servent *PASCAL getservbyname(const char *, const char *);
 #  endif
 # endif
 
+# ifdef OPENSSL_BSD_EMBEDDED
+#  undef AF_INET6
+#  undef AF_UNIX
+#  undef AI_PASSIVE
+# endif
+
 # define get_last_socket_error() errno
 # define clear_socket_error()    errno=0
 
