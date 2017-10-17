@@ -48,7 +48,9 @@
      (defined(__FreeBSD_version) && \
       ((__FreeBSD_version >= 470101 && __FreeBSD_version < 500000) || \
        __FreeBSD_version >= 500041))
-#  define HAVE_CRYPTODEV
+#  if !defined(OPENSSL_NO_CRYPTODEV)
+#   define HAVE_CRYPTODEV
+#  endif
 # endif
 # if defined(OpenBSD) && (OpenBSD >= 200110)
 #  define HAVE_SYSLOG_R
