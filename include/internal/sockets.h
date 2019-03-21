@@ -151,6 +151,13 @@ struct servent *PASCAL getservbyname(const char *, const char *);
 #  define closesocket(s)              close(s)
 #  define readsocket(s,b,n)           read((s),(b),(n))
 #  define writesocket(s,b,n)          write((s),(char *)(b),(n))
+# elif defined(OPENSSL_BSD_EMBEDDED)
+#  define get_last_socket_error() errno
+#  define clear_socket_error()    errno=0
+#  define ioctlsocket(a,b,c)      ioctl(a,b,c)
+#  define closesocket(s)          close(s)
+#  define readsocket(s,b,n)       recv((s),(b),(n),0)
+#  define writesocket(s,b,n)      send((s),(b),(n),MSG_NOSIGNAL)
 # else
 #  define ioctlsocket(a,b,c)      ioctl(a,b,c)
 #  define closesocket(s)          close(s)
